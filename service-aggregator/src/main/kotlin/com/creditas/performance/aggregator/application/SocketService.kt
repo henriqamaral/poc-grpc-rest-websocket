@@ -38,7 +38,7 @@ class SocketService(private val readFile: ReadFile) {
         webSocketStompClient.messageConverter = MappingJackson2MessageConverter()
         webSocketStompClient.connect(
             "ws://localhost:8000/ws",
-            MyStompSessionHandler(total, reps, "/app/message/batch")
+            MyStompSessionHandler(total)
         )
     }
 }

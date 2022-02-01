@@ -9,13 +9,13 @@ import java.lang.reflect.Type
 
 class MyStompSessionHandler(
     private val size: Int,
-    private val destination: String = "/app/message",
 ) :
     StompSessionHandlerAdapter() {
 
     private var stopWatch: StopWatch? = null
     private var currentPos = 0
     private var totalCalls = 0
+    private val destination: String = "/app/message/batch"
 
     override fun afterConnected(session: StompSession, connectedHeaders: StompHeaders) {
         session.subscribe("/topic/message", this)
