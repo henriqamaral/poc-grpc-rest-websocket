@@ -1,0 +1,47 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: performance-test
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:testdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    jpa:
+      database-platform: org.hibernate.dialect.HSQLDialect
+      show-sql: false
+      hibernate:
+        ddl-auto: create
+      properties:
+        hibernate:
+          jdbc:
+            batch_size: 100
+          generate_statistics: true
+
+management:
+  endpoints:
+    web:
+      base-path: ~
+      exposure:
+        include: info,health,prometheus
+      path-mapping:
+        prometheus: /metrics
+  metrics:
+    export:
+      prometheus:
+        enabled: false
+  endpoint:
+    prometheus:
+      enabled: true
+grpc:
+  enableReflection: true
+  enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          socket: DEBUG
